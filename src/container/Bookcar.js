@@ -10,7 +10,7 @@ function Bookcar(props) {
   const { date } = props;
   console.log(date);
   const [cars, setCars] = useState([]);
-  // const [amout, setAmout] = useState(1);
+  const [amout, setAmout] = useState(1);
 
   
 
@@ -34,24 +34,27 @@ function Bookcar(props) {
   }, [date]);
 
   function onChange(value) {
-    // setAmout(value);
+    setAmout(value);
   }
-
+  
   const submitAll = async (car) => {
+    console.log(date)
     const token = localStorageService.getToken();
-
     if (token) {
       await axios.post("/booking", {
-        // amout,
         start_date: date.startDate,
         end_date: date.endDate,
-        car_number: car.car_number,
+        amout:amout,
+        total:6,
+        car_id:car.car_id,
         status: "PENDING",
       });
+    
       // props.history.push("/bill");
     } else {
       props.history.push("/login");
     }
+
   };
   return (
     <div>
@@ -60,13 +63,17 @@ function Bookcar(props) {
            {cars.length?cars.map((car, index) => (
             <Col span={8} key={index}>
               <Card hoverable title={car.car_name} description={car.car_brand}>
-                <div>{car.car_number}</div>
+                <div>{car.car_id}</div>
                 <div>
                   <div>{car.car_brand}</div>
                   <div>
                     <img src={car.picture} width="200px" />
                   </div>
 
+                </div>
+
+                <div>
+                (<InputNumber min={1} max={10} defaultValue={3} onChange={onChange} />
                 </div>
 
                 <div>

@@ -20,7 +20,7 @@ function Register(props) {
         password: value.password,
         name: value.name,
         lastname: value.lastname,
-        email: value.email,
+        phone:value.phone,
         address: value.address,
       });
       notification.success({
@@ -127,6 +127,10 @@ function Register(props) {
             },
           ]}
         >
+          <Input />
+        </Form.Item>
+
+        <Form.Item name="phone" label="phone">
           <Input />
         </Form.Item>
 
